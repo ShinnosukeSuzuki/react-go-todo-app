@@ -16,7 +16,8 @@ func NewRouter(db *gorm.DB) *echo.Echo {
 	e := echo.New()
 
 	ur := repository.NewUserRepository(db)
-	uu := usecase.NewUserUsecase(ur)
+	uv := validator.NewUserValidator()
+	uu := usecase.NewUserUsecase(ur, uv)
 	uc := controller.NewUserController(uu)
 
 	tr := repository.NewTaskRepository(db)
