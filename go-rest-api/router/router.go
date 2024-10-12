@@ -4,6 +4,7 @@ import (
 	"go-rest-api/controller"
 	"go-rest-api/repository"
 	"go-rest-api/usecase"
+	"go-rest-api/validator"
 	"os"
 
 	echojwt "github.com/labstack/echo-jwt/v4"
@@ -19,7 +20,8 @@ func NewRouter(db *gorm.DB) *echo.Echo {
 	uc := controller.NewUserController(uu)
 
 	tr := repository.NewTaskRepository(db)
-	tu := usecase.NewTaskUsecase(tr)
+	tv := validator.NewTaskValidator()
+	tu := usecase.NewTaskUsecase(tr, tv)
 	tc := controller.NewTaskController(tu)
 
 	e.POST("/signup", uc.SignUp)
