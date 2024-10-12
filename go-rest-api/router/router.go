@@ -31,7 +31,7 @@ func NewRouter(db *gorm.DB) *echo.Echo {
 		CookieDomain:   os.Getenv("API_DOMAIN"),
 		CookieHTTPOnly: true,
 		CookieSecure:   true,
-		CookieSameSite: http.SameSiteDefaultMode,
+		CookieSameSite: http.SameSiteNoneMode,
 	}))
 
 	ur := repository.NewUserRepository(db)
